@@ -37,4 +37,14 @@ async def last(ctx, username: str):
 	else:
 		await ctx.send('Erreur lors de la récupération des données')
 
+@client.command()
+async def embed(ctx):
+	embed = discord.Embed(title="Titre", description="Description", color=0x00ff00)
+	embed.add_field(name="Champ 1", value="Valeur 1", inline=False)
+	embed.add_field(name="Champ 2", value="Valeur 2", inline=False)
+	embed.set_footer(text="Un truc de ce genre")
+	await ctx.send(embed=embed)
+
+
+
 client.run(token)
