@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from rank import get_user_rank, get_user_profile, get_user_help
+from rank import get_user_rank, get_user_profile, get_user_help, get_user_last
 from token_config_bot import token
 import requests
 import discord
@@ -13,7 +13,7 @@ headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
 @client.command(name="help_command", aliases=["h"])
 async def help(ctx, command=None):
 	message = get_user_help(command)
-	await ctx.send("```"+message+"```")
+	await ctx.send(message)
 
 @client.command()
 async def rank(ctx, username: str):
@@ -32,5 +32,14 @@ async def profile(ctx, username: str):
 		await ctx.send(scores)
 	else:
 		await ctx.send('Erreur lors de la récupération des données')
+
+@client.command()
+async def last(ctx, username: str):
+        r = requests.get(f'https://api.www.root-me.org/{username}',headers=headers)
+        if r.status_code == 200:
+                last = get_user_last(username)
+                await ctx.send(last)
+        else:
+                await ctx.send('Erreur lors de la récupération des données')
 
 client.run(token)

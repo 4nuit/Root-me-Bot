@@ -62,9 +62,33 @@ def get_user_profile(username=None):
 		time.sleep(0.2)  # Délai entre chaque requête
 		return "Error retrieving user ranking"
 
+import re
+
+def get_user_last(username=None):
+	response = requests.get(f"https://api.www.root-me.org/user/{username}", headers=headers)
+	if response.status_code == 200:
+		pattern = r';&nbsp;<a href="fr/Challenges/(.+?)/(.+?)"'
+		challenges = []
+		
+		for match in re.finditer(pattern, response.text):
+			#1er groupe de capture
+			challenge_category = match.group(1)
+			#2nd groupe de capture
+			challenge_name = match.group(2)
+			challenges.append((challenge_category, challenge_name))
+			time.sleep(0.1)  # Délai entre chaque requête
+
+		return challenges
+	
+	else:
+		time.sleep(0.2)  # Délai entre chaque requête
+		return "Error retrieving user ranking"
+
 # Exemple d'utilisation
 #username = "Nu1t"
 #points , rank = get_user_rank(username)
 #print(f"{username} a {points} points et est classé {rank} sur Root-Me")
 #scores = get_user_profile(username)
 #print(scores)
+#challenges = get_user_last(username)
+#print(challenges)
