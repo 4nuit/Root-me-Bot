@@ -23,8 +23,11 @@ async def rank(ctx, username: str):
 async def profile(ctx, username: str):
 	r = requests.get(f'https://api.www.root-me.org/{username}',headers=headers)
 	if r.status_code == 200:
-		scores = get_user_profile(username)
-		await ctx.send(scores)
+		embed = discord.Embed(title=username, description="Voici le profil de " + username, color=0x00ff00)
+		scores, imagetext = get_user_profile(username)
+		embed.set_thumbnail(url=imagetext)
+		embed.add_field(name="Score", value=scores, inline=False)
+		await ctx.send(embed=embed)
 	else:
 		await ctx.send('Erreur lors de la récupération des données')
 
@@ -44,7 +47,6 @@ async def embed(ctx):
 	embed.add_field(name="Champ 2", value="Valeur 2", inline=False)
 	embed.set_footer(text="Un truc de ce genre")
 	await ctx.send(embed=embed)
-
 
 
 client.run(token)

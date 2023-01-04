@@ -37,7 +37,11 @@ def get_user_profile(username=None):
 		for score in scores:
 			returnscores += score + "\n"
 
-		return returnscores
+		pattern_image = r'<img class="vmiddle logo_auteur logo_6forum" width="[0-9]+" height="[0-9]+" src="(.*)" alt="'+username+'" '
+		image = re.search(pattern_image, response.text).group(1)
+		imagetext = "https://www.root-me.org/"+image
+
+		return returnscores, imagetext
 	else:
 		time.sleep(0.2)  # Délai entre chaque requête
 		return "Error retrieving user profile"
