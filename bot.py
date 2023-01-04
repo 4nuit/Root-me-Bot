@@ -15,7 +15,7 @@ async def rank(ctx, username: str):
 	r = requests.get(f'https://api.www.root-me.org/{username}',headers=headers)
 	if r.status_code == 200:
 		points, rank = get_user_rank(username)
-		await ctx.send(f"{username} a {points} points et est n°{rank} sur Root-Me")
+		await ctx.send(f"{username} a {points} points et est n°{rank} sur Root-Me !")
 	else:
 		await ctx.send('Erreur lors de la récupération des données')
 
