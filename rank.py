@@ -39,7 +39,7 @@ def get_user_profile(username=None):
 
 		pattern_image = r'<img class="vmiddle logo_auteur logo_6forum" width="[0-9]+" height="[0-9]+" src="(.*)" alt="'+username+'" '
 		image = re.search(pattern_image, response.text)
-		imagetext = "https://www.root-me.org/"+image
+		imagetext = "https://www.root-me.org/"+str(image)
 
 		return returnscores, imagetext
 	else:
