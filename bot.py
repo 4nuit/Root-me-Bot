@@ -30,11 +30,11 @@ async def profile(ctx, username: str):
 
 @client.command()
 async def last(ctx, username: str):
-        r = requests.get(f'https://api.www.root-me.org/{username}',headers=headers)
-        if r.status_code == 200:
-                last = get_user_last(username)
-                await ctx.send(last)
-        else:
-                await ctx.send('Erreur lors de la récupération des données')
+	r = requests.get(f'https://api.www.root-me.org/{username}',headers=headers)
+	if r.status_code == 200:
+		last = get_user_last(username)
+		await ctx.send(last)
+	else:
+		await ctx.send('Erreur lors de la récupération des données')
 
 client.run(token)

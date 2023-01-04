@@ -52,7 +52,11 @@ def get_user_last(username=None):
 			challenges.append([challenge_category + ': ' + challenge_name])
 			time.sleep(0.1)  # Délai entre chaque requête
 
-		return challenges
+		returnchallenge = ""
+		for challenge in challenges:
+			returnchallenge += challenge[0] + "\n"
+
+		return returnchallenge
 	
 	else:
 		time.sleep(0.2)  # Délai entre chaque requête
