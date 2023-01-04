@@ -8,7 +8,7 @@ import re
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
 
 def get_user_rank(username=None):
-	response = requests.get(f"https://api.www.root-me.org/user/{username}", headers=headers)
+	response = requests.get(f"https://api.www.root-me.org/{username}", headers=headers)
 	if response.status_code == 200:
 		pattern_points = r"<h3><img src='squelettes/img/valid.svg\?\d+' width='\d+' height='\d+' />&nbsp;(\d+)</h3>"
 		points = re.search(pattern_points, response.text).group(1)
@@ -25,7 +25,7 @@ def get_user_rank(username=None):
 def get_user_profile(username=None):
 	scores = []
 	categories = ["Web-Client","Programmation","Cryptanalyse","Steganographie","Web-Serveur","Cracking","Realiste","Reseau","App-Script","App-Systeme","Forensic"]
-	response = requests.get(f"https://api.www.root-me.org/user/{username}", headers=headers)
+	response = requests.get(f"https://api.www.root-me.org/{username}", headers=headers)
 	if response.status_code == 200:
 		for category in categories:
 			pattern_category = r'href="fr/Challenges/'+category+'/">(\d+)%</a></span>'
@@ -47,9 +47,9 @@ def get_user_profile(username=None):
 		return "Error retrieving user profile"
 
 def get_user_last(username=None):
-	response = requests.get(f"https://api.www.root-me.org/user/{username}", headers=headers)
+	response = requests.get(f"https://api.www.root-me.org/{username}", headers=headers)
 	if response.status_code == 200:
-		pattern = r';&nbsp;<a href="fr/Challenges/(?P<text>.+)/(?P<challenge>.+)">(?P<category>.+)</a><span class="right txs gris italic vmiddle">(?P<date>.+)</span></li>'
+		pattern = r';&nbsp;<a href="fr/Challenges/(?P<category>.+)/(?P<text>.+)">(?P<challenge>.+)</a><span class="right txs gris italic vmiddle">(?P<date>.+)</span></li>'
 		challenges = []
 		
 		for match in re.finditer(pattern, response.text):
