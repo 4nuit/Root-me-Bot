@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from rank import get_user_rank
+from rank import get_user_rank, get_user_profile
 from token_config_bot import token
 import requests
 import discord
@@ -16,6 +16,15 @@ async def rank(ctx, username: str):
 	if r.status_code == 200:
 		points, rank = get_user_rank(username)
 		await ctx.send(f"{username} a {points} points et est n°{rank} sur Root-Me")
+	else:
+		await ctx.send('Erreur lors de la récupération des données')
+
+@client.command()
+async def profile(ctx, username: str):
+	r = requests.get(f'https://api.www.root-me.org/{username}',headers=headers)
+	if r.status_code == 200:
+		scores = get_user_profile(username)
+		await ctx.send(scores)
 	else:
 		await ctx.send('Erreur lors de la récupération des données')
 
