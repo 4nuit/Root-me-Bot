@@ -12,4 +12,4 @@ jobs:
               run: sudo apt update -y && sudo apt-get install -y sshpass
 
             - name: ssh reset bot
-              run: sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_DOMAIN }} /home/davidtchilian/resetbot.sh
+              run: sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_DOMAIN }} /home/davidtchilian/resetbot.sh &
