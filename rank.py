@@ -41,7 +41,9 @@ def get_user_profile(username=None):
 		image = re.search(pattern_image, response.text)
 		imagetext = "https://www.root-me.org/"+str(image)
 
-		return (returnscores, str(imagetext))
+		response2 = request.get(imagetext)
+		image = Image.open(BytesIO(response2.content))
+		return (returnscores, image)
 	else:
 		time.sleep(0.2)  # Délai entre chaque requête
 		return "Error retrieving user profile"
