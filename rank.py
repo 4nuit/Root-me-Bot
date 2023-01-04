@@ -33,38 +33,38 @@ def get_user_profile(username=None):
 			scores.append(category+': '+str(score_category)+"%")
 			time.sleep(0.1)  # Délai entre chaque requête
 
-		returnscores = ""
+		returnscores = "\n"
 		for score in scores:
 			returnscores += score + "\n"
 
 		return returnscores
 	else:
 		time.sleep(0.2)  # Délai entre chaque requête
-		return "Error retrieving user ranking"
+		return "Error retrieving user profile"
 
 def get_user_last(username=None):
 	response = requests.get(f"https://api.www.root-me.org/user/{username}", headers=headers)
 	if response.status_code == 200:
-		pattern = r';&nbsp;<a href="fr/Challenges/(.+?)/(.+?)"'
+		pattern = r';&nbsp;<a href="fr/Challenges/(?P<text>.+)/(?P<challenge>.+)">(?P<category>.+)</a><span class="right txs gris italic vmiddle">(?P<date>.+)</span></li>'
 		challenges = []
 		
 		for match in re.finditer(pattern, response.text):
-			#1er groupe de capture
-			challenge_category = match.group(1)
-			#2nd groupe de capture
-			challenge_name = match.group(2)
-			challenges.append([challenge_category + ': ' + challenge_name])
+			text = match.group('text')
+			challenge = match.group('challenge')
+			date = match.group('date')
+			category = match.group('category')
+			challenges.append(f"({category}) {challenge} : {date}")
 			time.sleep(0.1)  # Délai entre chaque requête
 
-		returnchallenge = ""
+		returnchallenge = "\n"
 		for challenge in challenges:
-			returnchallenge += challenge[0] + "\n"
+			returnchallenge += challenge + "\n"
 
 		return returnchallenge
 	
 	else:
 		time.sleep(0.2)  # Délai entre chaque requête
-		return "Error retrieving user ranking"
+		return "Error retrieving user last challenges"
 
 # Exemple d'utilisation
 #username = "Nu1t"
