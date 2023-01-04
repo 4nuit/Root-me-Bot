@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from rank import get_user_rank
 from token_config_bot import token
 import requests
@@ -12,8 +14,8 @@ headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
 async def rank(ctx, username: str):
 	r = requests.get(f'https://api.www.root-me.org/{username}',headers=headers)
 	if r.status_code == 200:
-		points = get_user_rank(username)
-		await ctx.send(f"{username} a {points} points sur Root-Me")
+		points, rank = get_user_rank(username)
+		await ctx.send(f"{username} a {points} points et est n°{rank} sur Root-Me")
 	else:
 		await ctx.send('Erreur lors de la récupération des données')
 
