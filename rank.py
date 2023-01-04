@@ -33,7 +33,11 @@ def get_user_profile(username=None):
 			scores.append(category+': '+str(score_category)+"%")
 			time.sleep(0.1)  # Délai entre chaque requête
 
-		return scores
+		returnscores = ""
+		for score in scores:
+			returnscores += score + "\n"
+
+		return returnscores
 	else:
 		time.sleep(0.2)  # Délai entre chaque requête
 		return "Error retrieving user ranking"
