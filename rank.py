@@ -62,8 +62,6 @@ def get_user_profile(username=None):
 		time.sleep(0.2)  # Délai entre chaque requête
 		return "Error retrieving user ranking"
 
-import re
-
 def get_user_last(username=None):
 	response = requests.get(f"https://api.www.root-me.org/user/{username}", headers=headers)
 	if response.status_code == 200:
