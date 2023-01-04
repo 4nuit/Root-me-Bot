@@ -1,5 +1,5 @@
-from rank import *
-from token_config_bot import *
+from rank import get_user_rank
+from token_config_bot import token
 import requests
 import discord
 from discord.ext import commands
