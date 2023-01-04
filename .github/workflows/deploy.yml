@@ -3,7 +3,7 @@ name: Deploy bot
 on: push
 
 jobs:
-    run-tests:
+    deploy:
         runs-on: ubuntu-latest
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
