@@ -24,11 +24,9 @@ async def profile(ctx, username: str):
 	r = requests.get(f'https://api.www.root-me.org/{username}',headers=headers)
 	if r.status_code == 200:
 		embed = discord.Embed(title=username, description="Voici le profil de " + username, color=0x00ff00)
-		scores, image = get_user_profile(username)
-		embed.set_thumbnail(image)
+		scores, imagetext = get_user_profile(username)
 		embed.add_field(name="Score", value=scores, inline=False)
 		await ctx.send(embed=embed)
-		await channel.send(file=discord.File(fp=BytesIO(image.tobytes()), filename='image.png'))
 	else:
 		await ctx.send('Erreur lors de la récupération des données')
 
