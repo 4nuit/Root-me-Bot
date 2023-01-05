@@ -13,9 +13,12 @@ headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
 @client.command()
 async def rank(ctx, username: str):
 	r = requests.get(f'https://api.www.root-me.org/{username}',headers=headers)
-	if r.status_code == 200:
+	if r.status_code == 200:		
+		embed = discord.Embed(title=username, description="Voici le classement de " + username, color=0x00ff00)
 		points, rank = get_user_rank(username)
-		await ctx.send(f"{username} a {points} points et est n°{rank} sur Root-Me !")
+		embed.add_field(name="Points", value=points, inline=False)
+		embed.add_field(name="Rang", value=rank, inline=False)
+		await ctx.send(embed=embed)
 	else:
 		await ctx.send('Erreur lors de la récupération des données')
 
@@ -33,9 +36,11 @@ async def profile(ctx, username: str):
 @client.command()
 async def last(ctx, username: str):
 	r = requests.get(f'https://api.www.root-me.org/{username}',headers=headers)
-	if r.status_code == 200:
+	if r.status_code == 200:		
+		embed = discord.Embed(title=username, description="Voici les dernières résolutions de " + username, color=0x00ff00)
 		last = get_user_last(username)
-		await ctx.send(last)
+		embed.add_field(name="Challenges", value=last, inline=False)
+		await ctx.send(embed=embed)
 	else:
 		await ctx.send('Erreur lors de la récupération des données')
 
