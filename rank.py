@@ -43,7 +43,7 @@ def get_user_rank(username=None):
 		pattern_rank = r"<h3><img src='squelettes/img/classement.svg\?\d+' width='\d+' height='\d+' />&nbsp;(\d+)</h3>"
 		rank = re.search(pattern_rank, response.text).group(1)
 		position = rank + "/" + str(number_of_users)
-		top = str(round((int(rank)/int(number_of_users))*100,2)) + "%"
+		top = str(round((int(rank)/int(number_of_users))*100,3)) + "%"
 
 		pattern_chall = r"<h3><img src='IMG/logo/rubon5\.svg\?\d+' width='\d+' height='\d+' />&nbsp;(\d+)</h3>"
 		challs = re.search(pattern_chall, response.text).group(1)
