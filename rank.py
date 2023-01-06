@@ -27,11 +27,21 @@ def get_number_of_users():
 	else:
 		return "Error retrieving number of users"
 
+def get_user_image(username=None):
+	response = requests.get("https://api.www.root-me.org/user/"+username, headers=headers)
+	if response.status_code == 200:
+		pattern_image = r'<img class="vmiddle logo_auteur logo_6forum" width="[0-9]+" height="[0-9]+" src="(.*)" alt="'+username+'" '
+		image = re.search(pattern_image, response.text).group(1)
+		image_url = "https://www.root-me.org/"+image
+		return image_url
+	else:
+		return "Error retrieving user profile"
 
 def get_user_rank(username=None):
 	number_of_users = get_number_of_users()
 	if number_of_users == "Error retrieving number of users":
-		number_of_users = 226553
+		number_of_users = 226550
+
 	response = requests.get(f"https://api.www.root-me.org/{username}", headers=headers)
 	if response.status_code == 200:
 		pattern_points = r"<h3><img src='squelettes/img/valid.svg\?\d+' width='\d+' height='\d+' />&nbsp;(\d+)</h3>"
@@ -67,11 +77,7 @@ def get_user_profile(username=None):
 		for score in scores:
 			returnscores += score + "\n"
 
-		pattern_image = r'<img class="vmiddle logo_auteur logo_6forum" width="[0-9]+" height="[0-9]+" src="(.*)" alt="'+username+'" '
-		image = re.search(pattern_image, response.text)
-		imagetext = "https://www.root-me.org/"+str(image)
-
-		return (returnscores, imagetext)
+		return returnscores
 	else:
 		return "Error retrieving user profile"
 
@@ -99,6 +105,8 @@ def get_user_last(username=None):
 
 # Exemple d'utilisation
 #username = "Nu1t"
+#image_url = get_user_image(username)
+#print(f"{image_url}")
 #points , position, top, challs, comprom = get_user_rank(username)
 #print(f"{username} a {points} points, est classé {position} (soit top {top}%), a résolu {challs} défis, et a pwn {comprom} machines ctfatd sur Root-Me")
 #scores = get_user_profile(username)

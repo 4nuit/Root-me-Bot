@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from rank import get_user_rank, get_user_profile, get_user_last
+from rank import get_user_image, get_user_rank, get_user_profile, get_user_last
 from token_config_bot import token
 import requests
 import discord
@@ -15,6 +15,8 @@ async def rank(ctx, username: str):
 	r = requests.get(f'https://api.www.root-me.org/{username}',headers=headers)
 	if r.status_code == 200:		
 		embed = discord.Embed(title=username, description="Voici le classement de " + username, color=0x00ff00)
+		image_url = get_user_image(username) 
+		embed.set_thumbnail(url=image_url)
 		points , position, top, challs, comprom = get_user_rank(username)
 		embed.add_field(name="Points", value=points, inline=False)
 		embed.add_field(name="Position", value=position, inline=False)
@@ -30,7 +32,9 @@ async def profile(ctx, username: str):
 	r = requests.get(f'https://api.www.root-me.org/{username}',headers=headers)
 	if r.status_code == 200:
 		embed = discord.Embed(title=username, description="Voici le profil de " + username, color=0x00ff00)
-		scores, imagetext = get_user_profile(username)
+		image_url = get_user_image(username) 
+		embed.set_thumbnail(url=image_url)
+		scores = get_user_profile(username)
 		embed.add_field(name="Score", value=scores, inline=False)
 		await ctx.send(embed=embed)
 	else:
@@ -41,6 +45,8 @@ async def last(ctx, username: str):
 	r = requests.get(f'https://api.www.root-me.org/{username}',headers=headers)
 	if r.status_code == 200:		
 		embed = discord.Embed(title=username, description="Voici les dernières résolutions de " + username, color=0x00ff00)
+		image_url = get_user_image(username) 
+		embed.set_thumbnail(url=image_url)
 		last = get_user_last(username)
 		embed.add_field(name="Challenges", value=last, inline=False)
 		await ctx.send(embed=embed)
