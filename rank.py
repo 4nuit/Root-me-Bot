@@ -32,6 +32,8 @@ def get_number_of_users():
 
 def get_user_rank(username=None):
 	number_of_users = get_number_of_users()
+	if number_of_users == "Error retrieving number of users":
+		number_of_users = 226553
 	response = requests.get(f"https://api.www.root-me.org/{username}", headers=headers)
 	if response.status_code == 200:
 		pattern_points = r"<h3><img src='squelettes/img/valid.svg\?\d+' width='\d+' height='\d+' />&nbsp;(\d+)</h3>"
