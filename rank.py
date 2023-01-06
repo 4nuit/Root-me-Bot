@@ -30,12 +30,14 @@ def get_number_of_users():
 def get_user_image(username=None):
 	response = requests.get("https://api.www.root-me.org/user/"+username, headers=headers)
 	if response.status_code == 200:
-		pattern_image = r'<img class="vmiddle logo_auteur logo_6forum" width="[0-9]+" height="[0-9]+" src="(.*)" alt="'+username+'" '
-		image = re.search(pattern_image, response.text).group(1)
-		image_url = "https://www.root-me.org/"+image
+		pattern_image = r'<img class="vmiddle logo_auteur logo_[0-9][a-z]+" width="[0-9]+" height="[0-9]+" src="(.*)" alt="'+username+'" '
+		if re.search(pattern_image, response.text) is not None:
+			image_url = "https://www.root-me.org/"+re.search(pattern_image, response.text).group(1)
+		else:
+			image_url = "https://www.root-me.org/IMG/logo/siteon0.svg?1637496509"
 		return image_url
 	else:
-		return "Error retrieving user profile"
+		return "https://www.root-me.org/IMG/logo/siteon0.svg?1637496509"
 
 def get_user_rank(username=None):
 	number_of_users = get_number_of_users()
@@ -104,9 +106,9 @@ def get_user_last(username=None):
 		return "Error retrieving user last challenges"
 
 # Exemple d'utilisation
-#username = "Nu1t"
-#image_url = get_user_image(username)
-#print(f"{image_url}")
+username = "Bdenneu"
+image_url = get_user_image(username)
+print(f"{image_url}")
 #points , position, top, challs, comprom = get_user_rank(username)
 #print(f"{username} a {points} points, est classé {position} (soit top {top}%), a résolu {challs} défis, et a pwn {comprom} machines ctfatd sur Root-Me")
 #scores = get_user_profile(username)
