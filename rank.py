@@ -29,6 +29,8 @@ def get_number_of_users():
 
 def get_user_image(username=None):
 	response = requests.get("https://api.www.root-me.org/user/"+username, headers=headers)
+	pattern_alias = r'content="profil de (.*)"'
+	username = re.search(pattern_alias, response.text).group(1)
 	if response.status_code == 200:
 		pattern_image = r'<img class="vmiddle logo_auteur logo_[0-9][a-z]+" width="[0-9]+" height="[0-9]+" src="(.*)" alt="'+username+'" '
 		if re.search(pattern_image, response.text) is not None:
@@ -38,7 +40,7 @@ def get_user_image(username=None):
 		return image_url
 	else:
 		return "https://www.root-me.org/IMG/logo/siteon0.svg?1637496509"
-
+		
 def get_user_rank(username=None):
 	number_of_users = get_number_of_users()
 	if number_of_users == "Error retrieving number of users":
