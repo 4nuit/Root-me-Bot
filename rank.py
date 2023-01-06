@@ -17,7 +17,13 @@ def get_user_rank(username=None):
 		pattern_rank = r"<h3><img src='squelettes/img/classement.svg\?\d+' width='\d+' height='\d+' />&nbsp;(\d+)</h3>"
 		rank = re.search(pattern_rank, response.text).group(1)
 
-		return points, rank
+		pattern_chall = r"<h3><img src='IMG/logo/rubon5\.svg\?\d+' width='\d+' height='\d+' />&nbsp;(\d+)</h3>"
+		challs = re.search(pattern_chall, response.text).group(1)
+
+		pattern_compromissions = r"<h3><img src='IMG/logo/rubon196.svg\?\d+' width='\d+' height='\d+' />&nbsp;(\d+)</h3>"
+		compromissions = re.search(pattern_compromissions, response.text).group(1)
+
+		return points, rank, challs, compromissions
 	else:
 		time.sleep(0.2)  # Délai entre chaque requête
 		return "Error retrieving user ranking"
@@ -72,8 +78,8 @@ def get_user_last(username=None):
 
 # Exemple d'utilisation
 #username = "Nu1t"
-#points , rank = get_user_rank(username)
-#print(f"{username} a {points} points et est classé {rank} sur Root-Me")
+#points , rank, challs, comprom = get_user_rank(username)
+#print(f"{username} a {points} points, est classé {rank}, a résolu {challs} défis, et a pwn {comprom} machines ctfatd sur Root-Me")
 #scores = get_user_profile(username)
 #print(scores)
 #challenges = get_user_last(username)
