@@ -15,9 +15,10 @@ async def rank(ctx, username: str):
 	r = requests.get(f'https://api.www.root-me.org/{username}',headers=headers)
 	if r.status_code == 200:		
 		embed = discord.Embed(title=username, description="Voici le classement de " + username, color=0x00ff00)
-		points , rank, challs, comprom = get_user_rank(username)
+		points , position, top, challs, comprom = get_user_rank(username)
 		embed.add_field(name="Points", value=points, inline=False)
-		embed.add_field(name="Rang", value=rank, inline=False)
+		embed.add_field(name="Position", value=position, inline=False)
+		embed.add_field(name="Top", value=top, inline=False)
 		embed.add_field(name="Challenges", value=challs, inline=False)
 		embed.add_field(name="Compromissions", value=comprom, inline=False)
 		await ctx.send(embed=embed)
