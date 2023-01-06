@@ -16,8 +16,7 @@ def get_number_of_users():
 		pattern_derniere_page = r'debut_classement=(\d+)'
 		result = re.search(pattern_derniere_page, string)
 		number = int(result.group(1)) #numéro de la dernière page de classement
-		time.sleep(0.1)
-
+		
 		response2 = requests.get("https://www.root-me.org/?page=structure&inc=modeles%2Fclassement&lang=fr&debut_classement=" + str(number))
 		regex = r"\b\d{6}\b"
 
@@ -26,7 +25,6 @@ def get_number_of_users():
 		return number_of_users
 
 	else:
-		time.sleep(0.2)  # Délai entre chaque requête
 		return "Error retrieving number of users"
 
 
@@ -38,7 +36,7 @@ def get_user_rank(username=None):
 	if response.status_code == 200:
 		pattern_points = r"<h3><img src='squelettes/img/valid.svg\?\d+' width='\d+' height='\d+' />&nbsp;(\d+)</h3>"
 		points = re.search(pattern_points, response.text).group(1)
-		time.sleep(0.2)  # Délai entre chaque requête
+		  
 		
 		pattern_rank = r"<h3><img src='squelettes/img/classement.svg\?\d+' width='\d+' height='\d+' />&nbsp;(\d+)</h3>"
 		rank = re.search(pattern_rank, response.text).group(1)
@@ -53,7 +51,6 @@ def get_user_rank(username=None):
 
 		return points, position, top, challs, compromissions
 	else:
-		time.sleep(0.2)  # Délai entre chaque requête
 		return "Error retrieving user ranking"
 
 def get_user_profile(username=None):
@@ -65,7 +62,6 @@ def get_user_profile(username=None):
 			pattern_category = r'href="fr/Challenges/'+category+'/">(\d+)%</a></span>'
 			score_category = re.search(pattern_category, response.text).group(1)
 			scores.append(category+': '+str(score_category)+"%")
-			time.sleep(0.1)  # Délai entre chaque requête
 
 		returnscores = "\n"
 		for score in scores:
@@ -77,7 +73,6 @@ def get_user_profile(username=None):
 
 		return (returnscores, imagetext)
 	else:
-		time.sleep(0.2)  # Délai entre chaque requête
 		return "Error retrieving user profile"
 
 def get_user_last(username=None):
@@ -91,8 +86,7 @@ def get_user_last(username=None):
 			challenge = match.group('challenge')
 			date = match.group('date')
 			category = match.group('category')
-			challenges.append(f"({category}) {challenge} : {date}")
-			time.sleep(0.1)  # Délai entre chaque requête
+			challenges.append(f"({category}) {challenge} : {date}")	  
 
 		returnchallenge = "\n"
 		for challenge in challenges:
@@ -100,8 +94,7 @@ def get_user_last(username=None):
 
 		return returnchallenge
 	
-	else:
-		time.sleep(0.2)  # Délai entre chaque requête
+	else: 
 		return "Error retrieving user last challenges"
 
 # Exemple d'utilisation
