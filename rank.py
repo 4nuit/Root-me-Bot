@@ -106,9 +106,9 @@ def get_user_last(username=None):
 		return "Error retrieving user last challenges"
 
 # Exemple d'utilisation
-username = "Bdenneu"
-image_url = get_user_image(username)
-print(f"{image_url}")
+#username = "Nu1t"
+#image_url = get_user_image(username)
+#print(f"{image_url}")
 #points , position, top, challs, comprom = get_user_rank(username)
 #print(f"{username} a {points} points, est classé {position} (soit top {top}%), a résolu {challs} défis, et a pwn {comprom} machines ctfatd sur Root-Me")
 #scores = get_user_profile(username)
