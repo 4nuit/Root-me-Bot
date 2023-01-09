@@ -65,7 +65,7 @@ def get_user_rank(username=None):
 
 		return points, position, top, challs, compromissions
 	else:
-		return "Error retrieving user ranking"
+		return -1, -1, -1, -1, -1
 
 def get_user_profile(username=None):
 	scores = []

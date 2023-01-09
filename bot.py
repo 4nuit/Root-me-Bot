@@ -18,6 +18,9 @@ async def rank(ctx, username: str):
 		image_url = get_user_image(username) 
 		embed.set_thumbnail(url=image_url)
 		points , position, top, challs, comprom = get_user_rank(username)
+		if points == -1:
+			await ctx.send('Erreur lors de la récupération des données')
+			return
 		embed.add_field(name="Points", value=points, inline=False)
 		embed.add_field(name="Position", value=position, inline=False)
 		embed.add_field(name="Top", value=top, inline=False)
