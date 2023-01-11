@@ -1,15 +1,15 @@
-name: Deploy bot
+# name: Deploy bot
 
-on: push
+# on: push
 
-jobs:
-    deploy:
-        runs-on: ubuntu-latest
-        env:
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-        steps:
-            - name: install sshpass
-              run: sudo apt update -y && sudo apt-get install -y sshpass
+# jobs:
+#     deploy:
+#         runs-on: ubuntu-latest
+#         env:
+#           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+#         steps:
+#             - name: install sshpass
+#               run: sudo apt update -y && sudo apt-get install -y sshpass
 
-            - name: ssh reset bot
-              run: sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_DOMAIN }} /home/davidtchilian/resetbot.sh &
+#             - name: ssh reset bot
+#               run: sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_DOMAIN }} /home/davidtchilian/resetbot.sh &
