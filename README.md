@@ -3,6 +3,7 @@
 
 ## Structure
 
+```
 ├── db
 ├── deploy.yml
 ├── LICENSE
@@ -12,6 +13,7 @@
     ├── bot.py
     ├── rank.py
     └── test.py
+```
 
 ## Commandes
 
