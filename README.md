@@ -3,14 +3,15 @@
 
 ## Structure
 
+├── db
+├── deploy.yml
+├── LICENSE
+├── rank.png
 ├── README.md
 └── src
-     ├── bot.py
-     └── rank.py
-├── db
-        ├── 
-        ├── 
-        └── 
+    ├── bot.py
+    ├── rank.py
+    └── test.py
 
 ## Commandes
 
