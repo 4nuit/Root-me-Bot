@@ -1,0 +1,4 @@
+discord
+mariadb
+re
+requests
