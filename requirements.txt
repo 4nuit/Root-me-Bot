@@ -1,4 +1,4 @@
+configparser
 discord
 mariadb
-re
 requests

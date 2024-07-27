@@ -1,8 +1,7 @@
 main:
-	pip3 install -r requirements.txt
-	nohup python3 src/bot.py &
+	nohup python3 bot.py &
 
 clean:
-	pkill -f "python3 src/bot.py"
+	rm -f nohup.out
 	find . -name "__pycache__" -type d -exec rm -r {} +
-	
+	pkill -f "python3 bot.py"

@@ -5,7 +5,9 @@
 Editer `token_config_bot.py` et `config.ini`
 
 ```bash
+pip3 install -r requirements.txt
 make
+make clean
 ```
 
 ## Structure

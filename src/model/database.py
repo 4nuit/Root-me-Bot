@@ -1,17 +1,16 @@
 import mariadb
 import configparser
+import sys
+from src.model.config import *
 
 class Database:
     def __init__(self):
-        config = configparser.ConfigParser()
-        config.read('config.ini')
-        self.conn = mariadb.connect(
-            user=config['database']['user'],
-            password=config['database']['password'],
-            host=config['database']['host'],
-            database=config['database']['database']
-        )
-        self.cursor = self.conn.cursor()
+        try:
+            self.conn = mariadb.connect(user=confuser,password=confpassword,host=confhost,database=confdatabase)
+            self.cursor = self.conn.cursor()
+        except mariadb.Error as e:
+            print(f"Error connecting to MariaDB Platform: {e}")
+            sys.exit(1)
 
     def add_user(self, pseudo, points=0):
         self.cursor.execute("INSERT INTO users (pseudo, points) VALUES (?, ?)", (pseudo, points))
