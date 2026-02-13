@@ -5,7 +5,7 @@ import requests
 import re
 
 # User Agent lambda pour pas avoir de 429
-headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+headers = {'User-Agent': 'curl/8.18.0'}
 
 def get_number_of_users():
 	response = requests.get("https://www.root-me.org/?page=structure&inc=modeles%2Fclassement&lang=fr")
@@ -42,9 +42,9 @@ def get_user_image(username=None):
 		return "https://www.root-me.org/IMG/logo/siteon0.svg?1637496509"
 		
 def get_user_rank(username=None):
-	number_of_users = get_number_of_users()
-	if number_of_users == "Error retrieving number of users":
-		number_of_users = 226550
+	#number_of_users = get_number_of_users()
+	#	if number_of_users == "Error retrieving number of users":
+	number_of_users = 320568
 
 	response = requests.get(f"https://api.www.root-me.org/{username}", headers=headers)
 	if response.status_code == 200:
