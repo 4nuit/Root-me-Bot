@@ -8,15 +8,15 @@ from discord.ext import commands
 
 intents = discord.Intents.all()
 client = commands.Bot(command_prefix = '!', intents=intents)
-headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+headers = {'User-Agent': 'curl/8.18.0'}
 
 @client.command()
-async def rank(ctx, username: str):
+async def score(ctx, username: str):
 	r = requests.get(f'https://api.www.root-me.org/{username}',headers=headers)
 	if r.status_code == 200:		
 		embed = discord.Embed(title=username, description="Voici le classement de " + username, color=0x00ff00)
-		image_url = get_user_image(username) 
-		embed.set_thumbnail(url=image_url)
+		#image_url = get_user_image(username) 
+		#embed.set_thumbnail(url=image_url)
 		points , position, top, challs, comprom = get_user_rank(username)
 		if points == -1:
 			await ctx.send('Erreur lors de la récupération des données')
@@ -35,8 +35,8 @@ async def profile(ctx, username: str):
 	r = requests.get(f'https://api.www.root-me.org/{username}',headers=headers)
 	if r.status_code == 200:
 		embed = discord.Embed(title=username, description="Voici le profil de " + username, color=0x00ff00)
-		image_url = get_user_image(username) 
-		embed.set_thumbnail(url=image_url)
+		#image_url = get_user_image(username) 
+		#embed.set_thumbnail(url=image_url)
 		scores = get_user_profile(username)
 		embed.add_field(name="Score", value=scores, inline=False)
 		await ctx.send(embed=embed)
@@ -48,8 +48,8 @@ async def last(ctx, username: str):
 	r = requests.get(f'https://api.www.root-me.org/{username}',headers=headers)
 	if r.status_code == 200:		
 		embed = discord.Embed(title=username, description="Voici les dernières résolutions de " + username, color=0x00ff00)
-		image_url = get_user_image(username) 
-		embed.set_thumbnail(url=image_url)
+		#image_url = get_user_image(username) 
+		#embed.set_thumbnail(url=image_url)
 		last = get_user_last(username)
 		embed.add_field(name="Challenges", value=last, inline=False)
 		await ctx.send(embed=embed)
